@@ -1,8 +1,8 @@
-import firebase from "firebase/app";
+import firebase from 'firebase/app';
 
-import "firebase/analytics";
-import "firebase/auth";
-import "firebase/firestore";
+import 'firebase/analytics';
+import 'firebase/auth';
+import 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -16,7 +16,7 @@ const firebaseConfig = {
 
 const app = firebase.initializeApp(firebaseConfig);
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === 'production') {
   firebase.analytics();
 }
 
