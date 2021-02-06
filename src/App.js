@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { AuthProvider } from './Auth';
 import PrivateRoute from './PrivateRoute';
-import Home from './components/Home/Home';
-import Share from './components/Share/Share';
+import Home from './route/Home/Home';
+import Share from './route/Share/Share';
 import './App.scss';
 
 const App = () => {
