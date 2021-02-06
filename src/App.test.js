@@ -3,6 +3,6 @@ import App from './App';
 
 afterEach(cleanup);
 
-test('should render without crash', () => {
+test('app should render without crash', () => {
   render(<App />);
 });
