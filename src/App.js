@@ -11,7 +11,7 @@ const App = () => {
     <AuthProvider>
       <BrowserRouter>
         <Switch>
-          <PrivateRoute exact path="share" component={Share} />
+          <PrivateRoute exact path="/share" component={Share} />
           <Route exact path="/" component={Home} />
           <Route path="*">
             <Redirect to="/" />
