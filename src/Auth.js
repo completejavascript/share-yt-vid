@@ -1,26 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Loading from './components/Loading/Loading';
 import firebaseApp from './firebase';
 
-export const AuthContext = React.createContext();
+const AuthContext = React.createContext();
+
+export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [pending, setPending] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [loadingText, setLoadingText] = useState('');
 
   useEffect(() => {
+    setLoading(true);
+    setLoadingText('Checking authentication...');
+
     firebaseApp.auth().onAuthStateChanged((user) => {
       setCurrentUser(user);
-      setPending(false);
+      setLoading(false);
+      setLoadingText('');
     });
   }, []);
 
-  if (pending) {
-    return <Loading description={'Checking authentication...'} />;
-  }
-
   return (
-    <AuthContext.Provider value={{ currentUser }}>
+    <AuthContext.Provider value={{ currentUser, setLoading, setLoadingText }}>
+      {loading && <Loading description={loadingText} />}
       {children}
     </AuthContext.Provider>
   );
