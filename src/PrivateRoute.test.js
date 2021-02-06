@@ -2,7 +2,7 @@ import { render, cleanup, screen } from '@testing-library/react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { AuthProvider } from './Auth';
 import PrivateRoute from './PrivateRoute';
-import Share from './components/Share/Share';
+import Share from './route/Share/Share';
 
 afterEach(cleanup);
 

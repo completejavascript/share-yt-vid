@@ -8,17 +8,19 @@ import './App.scss';
 
 const App = () => {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Switch>
-          <PrivateRoute exact path="/share" component={Share} />
-          <Route exact path="/" component={Home} />
-          <Route path="*">
-            <Redirect to="/" />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </AuthProvider>
+    <div className="app-container">
+      <AuthProvider>
+        <BrowserRouter>
+          <Switch>
+            <PrivateRoute exact path="/share" component={Share} />
+            <Route exact path="/" component={Home} />
+            <Route path="*">
+              <Redirect to="/" />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </AuthProvider>
+    </div>
   );
 };
 
