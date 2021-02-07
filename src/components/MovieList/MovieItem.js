@@ -13,7 +13,15 @@ const MovieItem = ({ movie }) => {
         />
       </div>
       <div className="video-info">
-        <div className="title">{movie.title}</div>
+        <div className="title">
+          <a
+            href={`https://www.youtube.com/watch?v=${movie.video_id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {movie.title}
+          </a>
+        </div>
         <div className="share-vote-wrapper">
           <div className="shared-by" title={movie.shared_by}>
             <span className="txt-medium">Shared by:</span> {movie.shared_by}

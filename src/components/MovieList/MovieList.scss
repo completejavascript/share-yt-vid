@@ -21,9 +21,11 @@
     }
     .video-info {
       .title {
-        color: var(--accent-color);
-        font-weight: 700;
-        font-size: 1.8rem;
+        a {
+          color: var(--accent-color) !important;
+          font-weight: 700;
+          font-size: 1.8rem;
+        }
       }
       .share-vote-wrapper {
         display: flex;
@@ -36,7 +38,7 @@
         }
       }
       .description {
-        max-height: 8rem;
+        max-height: 6rem;
         overflow: hidden;
         font-weight: 400;
         font-size: 1.6rem;
