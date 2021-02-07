@@ -4,7 +4,7 @@ import { AuthProvider } from './Auth';
 import PrivateRoute from './PrivateRoute';
 import Home from './route/Home/Home';
 import Share from './route/Share/Share';
-import { PATH_HOME, PATH_SHARE } from './constants';
+import { PATH_HOME, PATH_SHARE } from './utils/constants';
 import './App.scss';
 
 import ReactNotification from 'react-notifications-component';

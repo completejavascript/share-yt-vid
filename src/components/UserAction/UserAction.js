@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { addNotiError } from '../../notification';
-import { PATH_SHARE } from '../../constants';
+import { PATH_SHARE } from '../../utils/constants';
 import firebaseApp from '../../firebase';
 import './UserAction.scss';
 
