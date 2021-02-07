@@ -1,10 +1,13 @@
 import React from 'react';
+import Header from '../../components/Header/Header';
+import ShareBox from '../../components/ShareBox/ShareBox';
 import './Share.scss';
 
 const Share = () => {
   return (
     <div className="share-container">
-      <h1>Share</h1>
+      <Header />
+      <ShareBox />
     </div>
   );
 };
