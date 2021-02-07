@@ -1,17 +1,12 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthContext } from '../../Auth';
 import { addNotiError } from '../../notification';
 import { PATH_SHARE } from '../../constants';
 import firebaseApp from '../../firebase';
 import './UserAction.scss';
 
 const UserAction = ({ email }) => {
-  const { setLoading, setLoadingText } = useAuthContext();
-
   const handleLogout = useCallback(async () => {
-    setLoading(true);
-    setLoadingText('Logging out...');
     try {
       await firebaseApp.auth().signOut();
     } catch (error) {
@@ -20,11 +15,8 @@ const UserAction = ({ email }) => {
         title: 'Logout Error',
         message: error.message,
       });
-    } finally {
-      setLoading(false);
-      setLoadingText('');
     }
-  }, [setLoading, setLoadingText]);
+  }, []);
 
   return (
     <div className="user-action-container">
