@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { useAuthContext } from '../../Auth';
+import { addNotiError } from '../../notification';
 import firebaseApp from '../../firebase';
 import './UserAction.scss';
 
@@ -13,6 +14,10 @@ const UserAction = ({ email }) => {
       await firebaseApp.auth().signOut();
     } catch (error) {
       console.log('Logout Error: ', error);
+      addNotiError({
+        title: 'Logout Error',
+        message: error.message,
+      });
     } finally {
       setLoading(false);
       setLoadingText('');

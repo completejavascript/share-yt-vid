@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { useAuthContext } from '../../Auth';
+import { addNotiError } from '../../notification';
 import useInput from '../../hooks/useInput';
 import firebaseApp from '../../firebase';
 import './Login.scss';
@@ -22,6 +23,10 @@ const Login = () => {
           .signInWithEmailAndPassword(email.value, password.value);
       } catch (error) {
         console.log('Login Error:', error);
+        addNotiError({
+          title: 'Login Error',
+          message: error.message,
+        });
       } finally {
         setLoading(false);
         setLoadingText('');

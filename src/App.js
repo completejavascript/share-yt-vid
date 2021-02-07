@@ -6,21 +6,27 @@ import Home from './route/Home/Home';
 import Share from './route/Share/Share';
 import './App.scss';
 
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+
 const App = () => {
   return (
-    <div className="app-container">
-      <AuthProvider>
-        <BrowserRouter>
-          <Switch>
-            <PrivateRoute exact path="/share" component={Share} />
-            <Route exact path="/" component={Home} />
-            <Route path="*">
-              <Redirect to="/" />
-            </Route>
-          </Switch>
-        </BrowserRouter>
-      </AuthProvider>
-    </div>
+    <React.Fragment>
+      <ReactNotification />
+      <div className="app-container">
+        <AuthProvider>
+          <BrowserRouter>
+            <Switch>
+              <PrivateRoute exact path="/share" component={Share} />
+              <Route exact path="/" component={Home} />
+              <Route path="*">
+                <Redirect to="/" />
+              </Route>
+            </Switch>
+          </BrowserRouter>
+        </AuthProvider>
+      </div>
+    </React.Fragment>
   );
 };
 
