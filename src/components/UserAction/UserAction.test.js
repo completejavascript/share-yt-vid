@@ -4,7 +4,9 @@ import UserAction from './UserAction';
 afterEach(cleanup);
 
 test('UserAction should render without crash', () => {
-  render(<UserAction />);
+  const result = render(<UserAction />);
+  const elm = result.container.querySelector('.user-action-container');
+  expect(elm).toBeInTheDocument();
 });
 
 test("UserAction should show authorized user's email", () => {

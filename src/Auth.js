@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Loading from './components/Loading/Loading';
 import firebaseApp from './firebase';
 
-const AuthContext = React.createContext();
+export const AuthContext = React.createContext({});
 
 export const useAuthContext = () => useContext(AuthContext);
 

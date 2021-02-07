@@ -4,5 +4,7 @@ import Share from './Share';
 afterEach(cleanup);
 
 test('share should render without crash', () => {
-  render(<Share />);
+  const result = render(<Share />);
+  const elm = result.container.querySelector('.share-container');
+  expect(elm).toBeInTheDocument();
 });

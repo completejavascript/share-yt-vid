@@ -4,7 +4,9 @@ import Loading from './Loading';
 afterEach(cleanup);
 
 test('Loading should render without crash', () => {
-  render(<Loading />);
+  const result = render(<Loading />);
+  const elm = result.container.querySelector('.loading-container');
+  expect(elm).toBeInTheDocument();
 });
 
 test('Loading should show description correctly', () => {

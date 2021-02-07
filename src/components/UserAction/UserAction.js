@@ -7,9 +7,9 @@ const UserAction = ({ email }) => {
   const { setLoading, setLoadingText } = useAuthContext();
 
   const handleLogout = useCallback(async () => {
+    setLoading(true);
+    setLoadingText('Logging out...');
     try {
-      setLoading(true);
-      setLoadingText('Logging out...');
       await firebaseApp.auth().signOut();
     } catch (error) {
       console.log('Logout Error: ', error);

@@ -4,5 +4,7 @@ import Home from './Home';
 afterEach(cleanup);
 
 test('home should render without crash', () => {
-  render(<Home />);
+  const result = render(<Home />);
+  const elm = result.container.querySelector('.home-container');
+  expect(elm).toBeInTheDocument();
 });

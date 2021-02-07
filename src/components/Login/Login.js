@@ -10,9 +10,9 @@ const Login = () => {
     async (event) => {
       event.preventDefault();
       const { email, password } = event.target.elements;
+      setLoading(true);
+      setLoadingText('Logging in...');
       try {
-        setLoading(true);
-        setLoadingText('Logging in...');
         await firebaseApp
           .auth()
           .signInWithEmailAndPassword(email.value, password.value);
