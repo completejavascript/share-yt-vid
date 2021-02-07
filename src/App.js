@@ -4,6 +4,7 @@ import { AuthProvider } from './Auth';
 import PrivateRoute from './PrivateRoute';
 import Home from './route/Home/Home';
 import Share from './route/Share/Share';
+import { PATH_HOME, PATH_SHARE } from './constants';
 import './App.scss';
 
 import ReactNotification from 'react-notifications-component';
@@ -17,10 +18,10 @@ const App = () => {
         <AuthProvider>
           <BrowserRouter>
             <Switch>
-              <PrivateRoute exact path="/share" component={Share} />
-              <Route exact path="/" component={Home} />
+              <PrivateRoute exact path={PATH_SHARE} component={Share} />
+              <Route exact path={PATH_HOME} component={Home} />
               <Route path="*">
-                <Redirect to="/" />
+                <Redirect to={PATH_HOME} />
               </Route>
             </Switch>
           </BrowserRouter>

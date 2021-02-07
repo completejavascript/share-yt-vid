@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../Auth';
 import { addNotiError } from '../../notification';
+import { PATH_SHARE } from '../../constants';
 import firebaseApp from '../../firebase';
 import './UserAction.scss';
 
@@ -28,8 +29,15 @@ const UserAction = ({ email }) => {
   return (
     <div className="user-action-container">
       <span className="txt-welcome">Welcome {email}</span>
-      <button className="btn-share-movie">
-        <Link to="/share">Share a movie</Link>
+      <button
+        className="btn-share-movie"
+        disabled={window.location.pathname === PATH_SHARE}
+      >
+        {window.location.pathname === PATH_SHARE ? (
+          'Share a movie'
+        ) : (
+          <Link to={PATH_SHARE}>Share a movie</Link>
+        )}
       </button>
       <button className="btn-logout" onClick={handleLogout}>
         Logout
