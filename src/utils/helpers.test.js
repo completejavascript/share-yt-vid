@@ -1,43 +1,41 @@
-import { validateYoutubeUrl } from './helpers';
+import { getYoutubeVideoId } from './helpers';
 
-test('validateYoutubeUrl should work', () => {
-  expect(validateYoutubeUrl).toBeInstanceOf(Function);
+test('getYoutubeVideoId should work correctly', () => {
+  expect(getYoutubeVideoId).toBeInstanceOf(Function);
 
-  expect(validateYoutubeUrl()).toBe(false);
-  expect(validateYoutubeUrl(null)).toBe(false);
-  expect(validateYoutubeUrl(undefined)).toBe(false);
-  expect(validateYoutubeUrl('')).toBe(false);
-  expect(validateYoutubeUrl(false)).toBe(false);
-  expect(validateYoutubeUrl(true)).toBe(false);
+  expect(getYoutubeVideoId()).toBe('');
+  expect(getYoutubeVideoId(null)).toBe('');
+  expect(getYoutubeVideoId(undefined)).toBe('');
+  expect(getYoutubeVideoId('')).toBe('');
+  expect(getYoutubeVideoId(false)).toBe('');
+  expect(getYoutubeVideoId(true)).toBe('');
 
-  expect(validateYoutubeUrl('http://youtu.be/')).toBe(false);
-  expect(validateYoutubeUrl('youtube awesome')).toBe(false);
-  expect(validateYoutubeUrl('youtube/aykbvusadf')).toBe(false);
-  expect(validateYoutubeUrl('http://youtube/aykbvusadf')).toBe(false);
-
-  expect(validateYoutubeUrl('http://youtu.be/aykbvusadf')).toBe(true);
-  expect(validateYoutubeUrl('https://youtu.be/aykbvusadf/')).toBe(true);
-  expect(validateYoutubeUrl('www.youtube.com/aykbvusadf/')).toBe(true);
-  expect(validateYoutubeUrl('youtu.be/aykbvusadf')).toBe(true);
-  expect(validateYoutubeUrl('youtube.com/watch?v=aykbvusadf')).toBe(true);
-  expect(validateYoutubeUrl('http://youtu.be/-aykbvusadf')).toBe(true);
-  expect(validateYoutubeUrl('https://www.youtube.com/watch?v=aykbvusadf')).toBe(
-    true
+  expect(getYoutubeVideoId('http://youtu.be/')).toBe('');
+  expect(getYoutubeVideoId('youtube awesome')).toBe('');
+  expect(getYoutubeVideoId('youtube/jNQXAC9IVRw')).toBe('');
+  expect(getYoutubeVideoId('http://youtube/jNQXAC9IVRw')).toBe('');
+  expect(getYoutubeVideoId('www.youtube.com/jNQXAC9IVRw/')).toBe('');
+  expect(getYoutubeVideoId('http://www.youtube.com/watch?v=-jNQXAC9IVRw')).toBe(
+    ''
   );
-  expect(validateYoutubeUrl('http://www.youtube.com/watch?v=aykbvusadf')).toBe(
-    true
+
+  expect(getYoutubeVideoId('http://youtu.be/jNQXAC9IVRw')).toBe('jNQXAC9IVRw');
+  expect(getYoutubeVideoId('https://youtu.be/jNQXAC9IVRw/')).toBe(
+    'jNQXAC9IVRw'
   );
-  expect(validateYoutubeUrl('http://www.youtube.com/watch?v=-aykbvusadf')).toBe(
-    true
+  expect(getYoutubeVideoId('youtu.be/jNQXAC9IVRw')).toBe('jNQXAC9IVRw');
+  expect(getYoutubeVideoId('youtube.com/watch?v=jNQXAC9IVRw')).toBe(
+    'jNQXAC9IVRw'
+  );
+  expect(getYoutubeVideoId('https://www.youtube.com/watch?v=jNQXAC9IVRw')).toBe(
+    'jNQXAC9IVRw'
+  );
+  expect(getYoutubeVideoId('http://www.youtube.com/watch?v=jNQXAC9IVRw')).toBe(
+    'jNQXAC9IVRw'
   );
   expect(
-    validateYoutubeUrl(
-      'http://www.youtube.com/v/-aykbvusadf?version=3&autohide=1'
+    getYoutubeVideoId(
+      'http://www.youtube.com/v/jNQXAC9IVRw?version=3&autohide=1'
     )
-  ).toBe(true);
-  expect(
-    validateYoutubeUrl(
-      'http://www.youtube.com/oembed?url=http%3A//www.youtube.com/watch?v%3D-aykbvusadf&format=json'
-    )
-  ).toBe(true);
+  ).toBe('jNQXAC9IVRw');
 });

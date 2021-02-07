@@ -11,7 +11,6 @@ const defaultNotification = {
   dismiss: {
     duration: 5000,
     showIcon: true,
-    onScreen: true,
   },
 };
 

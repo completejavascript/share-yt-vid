@@ -3,12 +3,12 @@ import firebaseApp from './firebaseApp';
 
 const MOVIE_COLLECTION = 'movies';
 
-export const addMovie = ({ url }) => {
+export const addMovie = ({ video_id, title, description }) => {
   return firebaseApp.firestore().collection(MOVIE_COLLECTION).add({
-    url: url,
-    title: 'title1',
+    video_id,
+    title: title,
     shared_by: firebaseApp.auth().currentUser.email,
-    description: 'description 1',
+    description: description,
     created_date: firebase.firestore.FieldValue.serverTimestamp(),
     updated_date: firebase.firestore.FieldValue.serverTimestamp(),
     voted_date: 0,

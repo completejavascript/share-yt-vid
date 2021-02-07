@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import useInput from '../../hooks/useInput';
 import { useAuthContext } from '../../provider/Auth';
 import { addNotiError, addNotiSuccess } from '../../utils/notification';
-import { validateYoutubeUrl } from '../../utils/helpers';
+import { getYoutubeVideoId, getYoutubeVideoInfo } from '../../utils/helpers';
 import { addMovie } from '../../firebase/firebaseStore';
 import './ShareBox.scss';
 
@@ -14,31 +14,58 @@ const ShareBox = () => {
     async (event) => {
       event.preventDefault();
       const { url } = event.target.elements;
-      const formatedUrl = url.value.trim();
 
-      if (!validateYoutubeUrl(formatedUrl)) {
+      // Get Youtube video's id
+      const video_id = getYoutubeVideoId(url.value.trim());
+      if (!video_id) {
         addNotiError({
           title: 'Share Error',
-          message: 'Youtube URL is invalid',
+          message: "Youtube Video's URL is invalid",
         });
         return;
       }
 
+      // Get Youtube video's info
       setLoading(true);
-      setLoadingText('Sharing the movie...');
+      setLoadingText('Getting the movie info...');
+
+      let error = null;
+      let title = 'Movie title';
+      let description = 'Movie description';
+
       try {
-        await addMovie({ url: formatedUrl });
-        addNotiSuccess({
-          title: 'Share Success',
-          message: 'You shared the movie successfully',
-        });
-      } catch (error) {
-        console.log('Add movie error:', { error });
+        const data = await getYoutubeVideoInfo(video_id);
+        if (data && data.items && data.items.length > 0) {
+          title = data.items[0].snippet?.title ?? title;
+          description = data.items[0].snippet?.description ?? description;
+        }
+      } catch (err1) {
+        console.log('Get videoInfo error:', { err1 });
+        error = err1;
+      }
+
+      if (!error) {
+        // Add the movie to firebase
+        setLoadingText('Sharing the movie...');
+        try {
+          await addMovie({ video_id, title, description });
+          addNotiSuccess({
+            title: 'Share Success',
+            message: 'You shared the movie successfully',
+          });
+        } catch (err2) {
+          console.log('Add movie error:', { err2 });
+          error = err2;
+        }
+      }
+
+      if (error) {
         addNotiError({
           title: 'Share Error',
           message: error.message,
         });
       }
+
       setLoading(false);
       setLoadingText('');
     },
