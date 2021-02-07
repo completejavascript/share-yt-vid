@@ -2,34 +2,11 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { useAuthContext } from '../../provider/Auth';
 import { getMovies } from '../../firebase/firebaseStore';
 import { addNotiError } from '../../utils/notification';
+import MovieItem from './MovieItem';
 import './MovieList.scss';
 
-const MovieItem = ({ data }) => {
-  return (
-    <div className="movie-item">
-      <div className="video-container">
-        <iframe
-          frameBorder="0"
-          allow="fullscreen; accelerometer; encrypted-media; gyroscope; picture-in-picture"
-          src={`https://www.youtube.com/embed/${data.video_id}?autoplay=0`}
-        />
-      </div>
-      <div className="video-info">
-        <div className="title">{data.title}</div>
-        <div className="share-vote-wrapper">
-          <div className="shared-by" title={data.shared_by}>
-            <span className="txt-medium">Shared by:</span> {data.shared_by}
-          </div>
-        </div>
-        <div className="txt-medium">Description:</div>
-        <p className="description">{data.description}</p>
-      </div>
-    </div>
-  );
-};
-
 const MovieList = () => {
-  const { currentUser, setLoading, setLoadingText } = useAuthContext();
+  const { setLoading, setLoadingText } = useAuthContext();
 
   const [offset, setOffset] = useState(-1);
   const [movies, setMovies] = useState([]);
@@ -62,7 +39,7 @@ const MovieList = () => {
   return (
     <div className="movie-list-container">
       {movies.map((movie) => (
-        <MovieItem key={movie.video_id} data={movie} />
+        <MovieItem key={movie.video_id} movie={movie} />
       ))}
     </div>
   );

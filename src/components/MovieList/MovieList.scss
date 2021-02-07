@@ -26,6 +26,8 @@
         font-size: 1.8rem;
       }
       .share-vote-wrapper {
+        display: flex;
+        justify-content: space-between;
         .shared-by {
           width: 300px;
           white-space: nowrap;

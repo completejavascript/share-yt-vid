@@ -16,7 +16,7 @@ export const addMovie = ({ video_id, title, description }) => {
       created_date: firebase.firestore.FieldValue.serverTimestamp(),
       updated_date: firebase.firestore.FieldValue.serverTimestamp(),
       voted_date: 0,
-      upvoded_users: [],
+      upvoted_users: [],
       downvoted_users: [],
     });
 };
@@ -29,4 +29,62 @@ export const getMovies = ({ offset = -1, limit = 6 } = {}) => {
     .startAfter(offset)
     .limit(limit)
     .get();
+};
+
+export const voteUp = (data) => {
+  return firebaseApp
+    .firestore()
+    .collection(MOVIE_COLLECTION)
+    .doc(data.video_id)
+    .set({
+      ...data,
+      voted_date: firebase.firestore.FieldValue.serverTimestamp(),
+      upvoted_users: [
+        ...data.upvoted_users,
+        firebaseApp.auth().currentUser.email,
+      ],
+    });
+};
+
+export const unVoteUp = (data) => {
+  return firebaseApp
+    .firestore()
+    .collection(MOVIE_COLLECTION)
+    .doc(data.video_id)
+    .set({
+      ...data,
+      voted_date: firebase.firestore.FieldValue.serverTimestamp(),
+      upvoted_users: data.upvoted_users.filter(
+        (email) => email !== firebaseApp.auth().currentUser.email
+      ),
+    });
+};
+
+export const voteDown = (data) => {
+  return firebaseApp
+    .firestore()
+    .collection(MOVIE_COLLECTION)
+    .doc(data.video_id)
+    .set({
+      ...data,
+      voted_date: firebase.firestore.FieldValue.serverTimestamp(),
+      downvoted_users: [
+        ...data.downvoted_users,
+        firebaseApp.auth().currentUser.email,
+      ],
+    });
+};
+
+export const unVoteDown = (data) => {
+  return firebaseApp
+    .firestore()
+    .collection(MOVIE_COLLECTION)
+    .doc(data.video_id)
+    .set({
+      ...data,
+      voted_date: firebase.firestore.FieldValue.serverTimestamp(),
+      downvoted_users: data.downvoted_users.filter(
+        (email) => email !== firebaseApp.auth().currentUser.email
+      ),
+    });
 };
