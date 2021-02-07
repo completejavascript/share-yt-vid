@@ -1,29 +1,49 @@
 import React, { useCallback } from 'react';
 import useInput from '../../hooks/useInput';
-import { addNotiError } from '../../utils/notification';
+import { useAuthContext } from '../../provider/Auth';
+import { addNotiError, addNotiSuccess } from '../../utils/notification';
 import { validateYoutubeUrl } from '../../utils/helpers';
-import firebaseApp from '../../firebase/firebaseApp';
+import { addMovie } from '../../firebase/firebaseStore';
 import './ShareBox.scss';
 
 const ShareBox = () => {
   const { value: url, handleOnChange: handleSetUrl } = useInput('');
+  const { setLoading, setLoadingText } = useAuthContext();
 
-  const handleShare = useCallback((event) => {
-    event.preventDefault();
-    const { url } = event.target.elements;
-    const formatedUrl = url.value.trim();
+  const handleShare = useCallback(
+    async (event) => {
+      event.preventDefault();
+      const { url } = event.target.elements;
+      const formatedUrl = url.value.trim();
 
-    if (!validateYoutubeUrl(formatedUrl)) {
-      addNotiError({
-        title: 'Share Error',
-        message: 'Youtube URL is invalid',
-      });
-      return;
-    }
+      if (!validateYoutubeUrl(formatedUrl)) {
+        addNotiError({
+          title: 'Share Error',
+          message: 'Youtube URL is invalid',
+        });
+        return;
+      }
 
-    // TODO:
-    console.log({ formatedUrl });
-  }, []);
+      setLoading(true);
+      setLoadingText('Sharing the movie...');
+      try {
+        await addMovie({ url: formatedUrl });
+        addNotiSuccess({
+          title: 'Share Success',
+          message: 'You shared the movie successfully',
+        });
+      } catch (error) {
+        console.log('Add movie error:', { error });
+        addNotiError({
+          title: 'Share Error',
+          message: error.message,
+        });
+      }
+      setLoading(false);
+      setLoadingText('');
+    },
+    [setLoading, setLoadingText]
+  );
 
   return (
     <div className="sharebox-container">

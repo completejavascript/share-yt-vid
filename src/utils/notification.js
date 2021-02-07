@@ -25,4 +25,14 @@ const addNotiError = ({ title, message, ...other }) => {
   });
 };
 
-export { addNotiError };
+const addNotiSuccess = ({ title, message, ...other }) => {
+  store.addNotification({
+    ...defaultNotification,
+    type: 'success',
+    title,
+    message,
+    ...other,
+  });
+};
+
+export { addNotiError, addNotiSuccess };
