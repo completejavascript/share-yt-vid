@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import useInput from '../../hooks/useInput';
+import { addNotiError } from '../../notification';
+import { validateYoutubeUrl } from '../../utils/helpers';
 import './ShareBox.scss';
 
 const ShareBox = () => {
   const { value: url, handleOnChange: handleSetUrl } = useInput('');
 
-  const handleShare = () => {};
+  const handleShare = useCallback((event) => {
+    event.preventDefault();
+    const { url } = event.target.elements;
+    const formatedUrl = url.value.trim();
+
+    if (!validateYoutubeUrl(formatedUrl)) {
+      addNotiError({
+        title: 'Share Error',
+        message: 'Youtube URL is invalid',
+      });
+      return;
+    }
+
+    // TODO:
+    console.log({ formatedUrl });
+  }, []);
 
   return (
     <div className="sharebox-container">
