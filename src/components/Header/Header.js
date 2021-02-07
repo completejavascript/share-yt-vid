@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuthContext } from '../../Auth';
+import { useAuthContext } from '../../provider/Auth';
 import Login from '../Login/Login';
 import UserAction from '../UserAction/UserAction';
 import './Header.scss';

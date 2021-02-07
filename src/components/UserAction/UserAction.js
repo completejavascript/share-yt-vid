@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { addNotiError } from '../../notification';
+import { addNotiError } from '../../utils/notification';
 import { PATH_SHARE } from '../../utils/constants';
-import firebaseApp from '../../firebase';
+import firebaseApp from '../../firebase/firebaseApp';
 import './UserAction.scss';
 
 const UserAction = ({ email }) => {

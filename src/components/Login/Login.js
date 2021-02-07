@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
-import { useAuthContext } from '../../Auth';
-import { addNotiError } from '../../notification';
+import { useAuthContext } from '../../provider/Auth';
+import { addNotiError } from '../../utils/notification';
 import useInput from '../../hooks/useInput';
-import firebaseApp from '../../firebase';
+import firebaseApp from '../../firebase/firebaseApp';
 import './Login.scss';
 
 const Login = () => {

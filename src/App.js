@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { AuthProvider } from './Auth';
-import PrivateRoute from './PrivateRoute';
+import { AuthProvider } from './provider/Auth';
+import PrivateRoute from './route/PrivateRoute/PrivateRoute';
 import Home from './route/Home/Home';
 import Share from './route/Share/Share';
 import { PATH_HOME, PATH_SHARE } from './utils/constants';

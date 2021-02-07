@@ -1,6 +1,6 @@
 import { render, cleanup } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { AuthContext } from '../../Auth';
+import { AuthContext } from '../../provider/Auth';
 import Header from './Header';
 
 afterEach(cleanup);

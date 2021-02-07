@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
 import useInput from '../../hooks/useInput';
-import { addNotiError } from '../../notification';
+import { addNotiError } from '../../utils/notification';
 import { validateYoutubeUrl } from '../../utils/helpers';
+import firebaseApp from '../../firebase/firebaseApp';
 import './ShareBox.scss';
 
 const ShareBox = () => {
