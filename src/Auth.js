@@ -11,16 +11,19 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState('');
 
-  useEffect(() => {
-    setLoading(true);
-    setLoadingText('Checking authentication...');
+  // Need pending to check auth state before rendering route
+  const [pending, setPending] = useState(true);
 
+  useEffect(() => {
     firebaseApp.auth().onAuthStateChanged((user) => {
       setCurrentUser(user);
-      setLoading(false);
-      setLoadingText('');
+      setPending(false);
     });
   }, []);
+
+  if (pending) {
+    return <Loading description="Checking authentication..." />;
+  }
 
   return (
     <AuthContext.Provider value={{ currentUser, setLoading, setLoadingText }}>
