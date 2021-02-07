@@ -16,8 +16,12 @@ const MovieItem = ({ data }) => {
       </div>
       <div className="video-info">
         <div className="title">{data.title}</div>
-        <div className="share-by">Shared by: {data.shared_by}</div>
-        <div>Description:</div>
+        <div className="share-vote-wrapper">
+          <div className="shared-by" title={data.shared_by}>
+            <span className="txt-medium">Shared by:</span> {data.shared_by}
+          </div>
+        </div>
+        <div className="txt-medium">Description:</div>
         <p className="description">{data.description}</p>
       </div>
     </div>

@@ -1,16 +1,16 @@
 .movie-list-container {
   margin: 1.5rem;
   .movie-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 3rem;
     .video-container {
       overflow: hidden;
       position: relative;
-      width: 300px;
-      height: 169px;
-      flex-shrink: 0;
+      width: 100%;
+      &::after {
+        padding-top: 56.25%;
+        display: block;
+        content: '';
+      }
       iframe {
         position: absolute;
         top: 0;
@@ -20,12 +20,18 @@
       }
     }
     .video-info {
-      margin-left: 1.5rem;
-      flex-grow: 1;
-      height: 169px;
       .title {
         color: var(--accent-color);
         font-weight: 700;
+        font-size: 1.8rem;
+      }
+      .share-vote-wrapper {
+        .shared-by {
+          width: 300px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
       .description {
         max-height: 8rem;
@@ -33,6 +39,9 @@
         font-weight: 400;
         font-size: 1.6rem;
         margin: 0px;
+      }
+      .txt-medium {
+        font-weight: 500;
       }
     }
   }
@@ -42,11 +51,17 @@
   .movie-list-container {
     margin: 2.5rem 5rem;
     .movie-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       .video-container {
+        flex-shrink: 0;
         width: 350px;
         height: 196px;
       }
       .video-info {
+        flex-grow: 1;
+        margin-left: 1.5rem;
         height: 196px;
       }
     }
