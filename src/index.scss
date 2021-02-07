@@ -93,6 +93,12 @@ input[type='button'] {
     color: var(--primary-color);
     border-color: var(--primary-color-hover);
   }
+  &:disabled {
+    cursor: default;
+    color: #757575;
+    background-color: #fff;
+    border-color: #cdcdcd;
+  }
 }
 
 h1,
