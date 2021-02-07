@@ -20,3 +20,13 @@ export const addMovie = ({ video_id, title, description }) => {
       downvoted_users: [],
     });
 };
+
+export const getMovies = ({ offset = -1, limit = 6 } = {}) => {
+  return firebaseApp
+    .firestore()
+    .collection(MOVIE_COLLECTION)
+    .orderBy('created_date')
+    .startAfter(offset)
+    .limit(limit)
+    .get();
+};
