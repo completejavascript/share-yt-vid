@@ -17,20 +17,41 @@ const Login = () => {
       const { email, password } = event.target.elements;
       setLoading(true);
       setLoadingText('Logging in...');
+
+      // Try login first
+      let error = null;
       try {
         await firebaseApp
           .auth()
           .signInWithEmailAndPassword(email.value, password.value);
-      } catch (error) {
-        console.log('Login Error:', error);
+      } catch (err1) {
+        console.log('Login error:', err1);
+        error = err1;
+      }
+
+      // If error = auth/user-not-found -> create new user
+      if (error && error.code === 'auth/user-not-found') {
+        try {
+          await firebaseApp
+            .auth()
+            .createUserWithEmailAndPassword(email.value, password.value);
+          error = null;
+        } catch (err2) {
+          console.log('Signup error:', err2);
+          error = err2;
+        }
+      }
+
+      // If still error
+      if (error) {
         addNotiError({
-          title: 'Login Error',
+          title: 'Login or Register Error',
           message: error.message,
         });
-      } finally {
-        setLoading(false);
-        setLoadingText('');
       }
+
+      setLoading(false);
+      setLoadingText('');
     },
     [setLoading, setLoadingText]
   );
