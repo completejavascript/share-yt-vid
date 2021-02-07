@@ -1,4 +1,5 @@
 import { render, cleanup } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { AuthContext } from '../../Auth';
 import Header from './Header';
 
@@ -7,7 +8,9 @@ afterEach(cleanup);
 test('Header should render without crash', async () => {
   const result = render(
     <AuthContext.Provider value={{ currentUser: {} }}>
-      <Header />
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
     </AuthContext.Provider>
   );
   const elm = result.container.querySelector('.header-container');
@@ -17,7 +20,9 @@ test('Header should render without crash', async () => {
 test('Header should show correct title', () => {
   const result = render(
     <AuthContext.Provider value={{ currentUser: {} }}>
-      <Header />
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
     </AuthContext.Provider>
   );
   const elm = result.container.querySelector('.title');
@@ -27,7 +32,9 @@ test('Header should show correct title', () => {
 test('Header should show login', () => {
   const result = render(
     <AuthContext.Provider value={{ currentUser: null }}>
-      <Header />
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
     </AuthContext.Provider>
   );
   const elm = result.container.querySelector('.login-container');
@@ -37,7 +44,9 @@ test('Header should show login', () => {
 test('Header should show userAction', () => {
   const result = render(
     <AuthContext.Provider value={{ currentUser: {} }}>
-      <Header />
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
     </AuthContext.Provider>
   );
   const elm = result.container.querySelector('.user-action-container');

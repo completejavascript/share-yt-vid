@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../Auth';
 import { addNotiError } from '../../notification';
 import firebaseApp from '../../firebase';
@@ -27,7 +28,9 @@ const UserAction = ({ email }) => {
   return (
     <div className="user-action-container">
       <span className="txt-welcome">Welcome {email}</span>
-      <button className="btn-share-movie">Share a movie</button>
+      <button className="btn-share-movie">
+        <Link to="/share">Share a movie</Link>
+      </button>
       <button className="btn-logout" onClick={handleLogout}>
         Logout
       </button>
