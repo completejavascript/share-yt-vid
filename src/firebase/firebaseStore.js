@@ -21,12 +21,21 @@ export const addMovie = ({ video_id, title, description }) => {
     });
 };
 
-export const getMovies = ({ offset = -1, limit = 6 } = {}) => {
+export const getMovies = ({ last_date, limit = 6 } = {}) => {
+  if (!last_date) {
+    return firebaseApp
+      .firestore()
+      .collection(MOVIE_COLLECTION)
+      .orderBy('created_date', 'desc')
+      .limit(limit)
+      .get();
+  }
+
   return firebaseApp
     .firestore()
     .collection(MOVIE_COLLECTION)
-    .orderBy('created_date')
-    .startAfter(offset)
+    .orderBy('created_date', 'desc')
+    .startAfter(last_date)
     .limit(limit)
     .get();
 };
@@ -39,10 +48,9 @@ export const voteUp = (data) => {
     .set({
       ...data,
       voted_date: firebase.firestore.FieldValue.serverTimestamp(),
-      upvoted_users: [
-        ...data.upvoted_users,
-        firebaseApp.auth().currentUser.email,
-      ],
+      upvoted_users: Array.from(
+        new Set(data.upvoted_users).add(firebaseApp.auth().currentUser.email)
+      ),
     });
 };
 
@@ -68,10 +76,9 @@ export const voteDown = (data) => {
     .set({
       ...data,
       voted_date: firebase.firestore.FieldValue.serverTimestamp(),
-      downvoted_users: [
-        ...data.downvoted_users,
-        firebaseApp.auth().currentUser.email,
-      ],
+      downvoted_users: Array.from(
+        new Set(data.downvoted_users).add(firebaseApp.auth().currentUser.email)
+      ),
     });
 };
 

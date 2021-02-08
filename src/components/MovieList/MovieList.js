@@ -1,25 +1,37 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState, useRef } from 'react';
+import MovieItem from './MovieItem';
 import { useAuthContext } from '../../provider/Auth';
 import { getMovies } from '../../firebase/firebaseStore';
-import { addNotiError } from '../../utils/notification';
-import MovieItem from './MovieItem';
+import { addNotiError, addNotiSuccess } from '../../utils/notification';
 import './MovieList.scss';
+
+const FETCH_LIMIT = 4;
 
 const MovieList = () => {
   const { setLoading, setLoadingText } = useAuthContext();
-
-  const [offset, setOffset] = useState(-1);
   const [movies, setMovies] = useState([]);
+  const needFetch = useRef(true);
 
   const handleGetMovies = useCallback(async () => {
     setLoading(true);
     setLoadingText('Getting movies...');
 
     try {
-      const data = await getMovies();
-      const docs = data.docs;
-      setMovies(docs.map((doc) => doc.data()));
-      setOffset(docs.length - 1);
+      const moviesCnt = movies.length;
+      const last_date =
+        moviesCnt > 0 ? movies[moviesCnt - 1].created_date : undefined;
+      const data = await getMovies({ last_date, limit: FETCH_LIMIT });
+      needFetch.current = false;
+
+      const newMovies = data.docs.map((doc) => doc.data());
+      if (newMovies.length > 0) {
+        setMovies([...movies, ...newMovies]);
+      } else {
+        addNotiSuccess({
+          title: 'Getting Movies Success',
+          message: 'There are no more movies right now',
+        });
+      }
     } catch (error) {
       console.log('Getting movies error:', { error });
       addNotiError({
@@ -30,17 +42,28 @@ const MovieList = () => {
 
     setLoading(false);
     setLoadingText('');
-  }, [setLoading, setLoadingText]);
+  }, [setLoading, setLoadingText, movies, needFetch]);
+
+  const handleLoadMore = useCallback(async () => {
+    needFetch.current = true;
+    handleGetMovies();
+  }, [handleGetMovies]);
 
   useEffect(() => {
-    handleGetMovies(offset);
-  }, [handleGetMovies, offset]);
+    if (needFetch.current) {
+      needFetch.current = false;
+      handleGetMovies();
+    }
+  }, [handleGetMovies, needFetch]);
 
   return (
     <div className="movie-list-container">
       {movies.map((movie) => (
         <MovieItem key={movie.video_id} movie={movie} />
       ))}
+      <div className="btn-loadmore-wrapper">
+        <button onClick={handleLoadMore}>Load more</button>
+      </div>
     </div>
   );
 };
