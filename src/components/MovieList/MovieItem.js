@@ -8,6 +8,7 @@ const MovieItem = ({ movie }) => {
         <iframe
           title={movie.title}
           frameBorder="0"
+          loading="lazy"
           allow="fullscreen; accelerometer; encrypted-media; gyroscope; picture-in-picture"
           src={`https://www.youtube.com/embed/${movie.video_id}?autoplay=0`}
         />
@@ -28,9 +29,7 @@ const MovieItem = ({ movie }) => {
           </div>
           <VoteContainer movie={movie} />
         </div>
-        <div>
-          <span className="txt-medium">Description:</span>
-        </div>
+        <div className="txt-medium">Description:</div>
         <p className="description">{movie.description}</p>
       </div>
     </div>
