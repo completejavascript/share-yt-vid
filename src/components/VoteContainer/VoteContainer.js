@@ -46,7 +46,7 @@ const VoteContainer = ({ movie }) => {
 
   useEffect(() => {
     setVoteStatus(getCurrentVoteStatus());
-  }, [getCurrentVoteStatus, currentUser, movie]);
+  }, [getCurrentVoteStatus]);
 
   const handleVoteUp = useCallback(async () => {
     setLoading(true);
