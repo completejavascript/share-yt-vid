@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback, useState, useRef } from 'react';
+import ScrollToTop from '../ScrollToTop/ScrollToTop';
 import MovieItem from './MovieItem';
 import { useAuthContext } from '../../provider/Auth';
 import { getMovies } from '../../firebase/firebaseStore';
@@ -64,6 +65,7 @@ const MovieList = () => {
       <div className="btn-loadmore-wrapper">
         <button onClick={handleLoadMore}>Load more</button>
       </div>
+      <ScrollToTop />
     </div>
   );
 };
