@@ -5,6 +5,13 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
     cursor: pointer;
+    a.no-style {
+      &:hover,
+      &:focus,
+      &:visited {
+        color: var(--font-color);
+      }
+    }
   }
 }
 
