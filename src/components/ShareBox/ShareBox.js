@@ -4,6 +4,7 @@ import { useAuthContext } from '../../provider/Auth';
 import { addNotiError, addNotiSuccess } from '../../utils/notification';
 import { getYoutubeVideoId, getYoutubeVideoInfo } from '../../utils/helpers';
 import { addMovie } from '../../firebase/firebaseStore';
+import { img_video_placeholder } from '../../assets/index';
 import './ShareBox.scss';
 
 const ShareBox = () => {
@@ -32,12 +33,15 @@ const ShareBox = () => {
       let error = null;
       let title = 'Movie title';
       let description = 'Movie description';
+      let thumbnail = img_video_placeholder;
 
       try {
         const data = await getYoutubeVideoInfo(video_id);
         if (data && data.items && data.items.length > 0) {
           title = data.items[0].snippet?.title ?? title;
           description = data.items[0].snippet?.description ?? description;
+          thumbnail =
+            data.items[0].snippet?.thumbnails?.standard?.url ?? thumbnail;
         }
       } catch (err1) {
         console.log('Get videoInfo error:', { err1 });
@@ -48,7 +52,7 @@ const ShareBox = () => {
         // Add the movie to firebase
         setLoadingText('Sharing the movie...');
         try {
-          await addMovie({ video_id, title, description });
+          await addMovie({ video_id, title, description, thumbnail });
           addNotiSuccess({
             title: 'Share Success',
             message: 'You shared the movie successfully',

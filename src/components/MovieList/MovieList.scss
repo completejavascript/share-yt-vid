@@ -65,7 +65,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      .video-container {
+      .video-container,
+      .video-placeholder {
         flex-shrink: 0;
         width: 350px;
         height: 196px;
