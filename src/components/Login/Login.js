@@ -14,16 +14,13 @@ const Login = () => {
   const handleLogin = useCallback(
     async (event) => {
       event.preventDefault();
-      const { email, password } = event.target.elements;
       setLoading(true);
       setLoadingText('Logging in...');
 
       // Try login first
       let error = null;
       try {
-        await firebaseApp
-          .auth()
-          .signInWithEmailAndPassword(email.value, password.value);
+        await firebaseApp.auth().signInWithEmailAndPassword(email, password);
       } catch (err1) {
         console.log('Login error:', err1);
         error = err1;
@@ -53,7 +50,7 @@ const Login = () => {
       setLoading(false);
       setLoadingText('');
     },
-    [setLoading, setLoadingText]
+    [setLoading, setLoadingText, email, password]
   );
 
   return (
@@ -64,6 +61,7 @@ const Login = () => {
           name="email"
           type="email"
           placeholder="Email"
+          aria-label="email"
           value={email}
           onChange={handleSetEmail}
         />
@@ -71,12 +69,14 @@ const Login = () => {
           name="password"
           type="password"
           placeholder="Password"
+          aria-label="password"
           value={password}
           onChange={handleSetPassword}
         />
         <input
           name="submit"
           type="submit"
+          aria-label="submit"
           value="Login / Register"
           disabled={!email || !password}
         />
