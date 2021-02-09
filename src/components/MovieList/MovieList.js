@@ -63,7 +63,9 @@ const MovieList = () => {
         <MovieItem key={movie.video_id} movie={movie} />
       ))}
       <div className="btn-loadmore-wrapper">
-        <button onClick={handleLoadMore}>Load more</button>
+        <button className="btn-loadmore" onClick={handleLoadMore}>
+          Load more
+        </button>
       </div>
       <ScrollToTop />
     </div>
