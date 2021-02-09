@@ -41,7 +41,13 @@ const ScrollToTop = ({ thresholdTop = 100 }) => {
 
   return (
     <div className="scroll-to-top" ref={rootRef} onClick={handleClick}>
-      <img className="icon" src={ic_angle_up_solid} alt="angle up" />
+      <img
+        className="icon"
+        src={ic_angle_up_solid}
+        alt="angle up"
+        width="15"
+        height="15"
+      />
     </div>
   );
 };

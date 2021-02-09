@@ -8,6 +8,8 @@ const VotedDownItem = ({ handleUnVoteDown }) => {
         className="icon"
         src={ic_thumbs_down_solid}
         alt="thumbs up solid icon"
+        width="20"
+        height="20"
         onClick={handleUnVoteDown}
       />
     </div>

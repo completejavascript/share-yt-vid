@@ -11,12 +11,16 @@ const UnvoteItem = ({ handleVoteUp, handleVoteDown }) => {
         className="icon"
         src={ic_thumbs_up_regular}
         alt="thumbs up regular icon"
+        width="20"
+        height="20"
         onClick={handleVoteUp}
       />
       <img
         className="icon"
         src={ic_thumbs_down_regular}
         alt="thumbs down regular icon"
+        width="20"
+        height="20"
         onClick={handleVoteDown}
       />
     </div>
