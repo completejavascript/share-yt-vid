@@ -17,23 +17,11 @@
     }
     .sharebox-url {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      label {
-        width: 150px;
-      }
-      input {
-        width: calc(100% - 150px);
-        margin-bottom: 0;
-      }
+      flex-direction: column;
     }
     .sharebox-submit {
-      display: flex;
-      justify-content: flex-end;
       input {
-        width: calc(100% - 150px);
-        margin-bottom: 0;
+        width: 100%;
       }
     }
   }
@@ -43,6 +31,28 @@
   .sharebox-container {
     .sharebox-form {
       width: calc(600px - 3rem);
+      .sharebox-url {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        label {
+          width: 150px;
+        }
+        input {
+          width: calc(100% - 150px);
+          margin-bottom: 0;
+        }
+      }
+      .sharebox-submit {
+        display: flex;
+        justify-content: flex-end;
+        input {
+          width: calc(100% - 150px);
+          margin-bottom: 0;
+        }
+      }
     }
   }
 }
