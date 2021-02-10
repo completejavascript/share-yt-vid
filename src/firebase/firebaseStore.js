@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import firebaseApp from './firebaseApp';
 
 const MOVIE_COLLECTION = 'movies';
