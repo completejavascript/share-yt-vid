@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 
-import 'firebase/analytics';
+// import 'firebase/analytics';
 import 'firebase/auth';
 import 'firebase/firestore';
 
@@ -16,8 +16,8 @@ const firebaseConfig = {
 
 const app = firebase.initializeApp(firebaseConfig);
 
-if (process.env.NODE_ENV === 'production') {
-  firebase.analytics();
-}
+// if (process.env.NODE_ENV === 'production') {
+//   firebase.analytics();
+// }
 
 export default app;
