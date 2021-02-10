@@ -6,6 +6,10 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+if (process.env.NODE_ENV === 'production') {
+  window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () {};
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
