@@ -30,7 +30,7 @@
         display: flex;
         justify-content: space-between;
         .shared-by {
-          width: 300px;
+          width: 270px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -75,6 +75,11 @@
         flex-grow: 1;
         margin-left: 3rem;
         height: 196px;
+        .share-vote-wrapper {
+          .shared-by {
+            width: 300px;
+          }
+        }
       }
     }
   }
