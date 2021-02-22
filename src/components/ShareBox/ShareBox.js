@@ -8,7 +8,12 @@ import { img_video_placeholder } from '../../assets/index';
 import './ShareBox.scss';
 
 const ShareBox = () => {
-  const { value: url, handleOnChange: handleSetUrl } = useInput('');
+  const {
+    value: url,
+    setValue: setUrl,
+    handleOnChange: handleSetUrl,
+  } = useInput('');
+
   const { setLoading, setLoadingText } = useAuthContext();
 
   const handleShare = useCallback(
@@ -72,8 +77,9 @@ const ShareBox = () => {
 
       setLoading(false);
       setLoadingText('');
+      setUrl('');
     },
-    [setLoading, setLoadingText]
+    [setLoading, setLoadingText, setUrl]
   );
 
   return (
