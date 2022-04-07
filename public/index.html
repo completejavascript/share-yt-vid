@@ -12,7 +12,10 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!-- dns-prefetch -->
     <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
-    <link rel="dns-prefetch" href="https://firebaseinstallations.googleapis.com" />
+    <link
+      rel="dns-prefetch"
+      href="https://firebaseinstallations.googleapis.com"
+    />
     <link rel="dns-prefetch" href="https://firebase.googleapis.com" />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <!--
@@ -30,12 +33,26 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Funny Movies By Lam Pham</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-96543695-6"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-96543695-11");
+    </script>
   </head>
+
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <script>
-      if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === 'object') {
-        __REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function() {};
+      if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === "object") {
+        __REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () {};
       }
     </script>
     <div id="root"></div>
